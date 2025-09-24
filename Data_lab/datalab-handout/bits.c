@@ -176,7 +176,8 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  int m=0xAAAAAAAA;
+  int n=0xAA;
+  int m=(n<<24)|(n<<16)|(n<<8)|n;
   return !((x&m)^m);
 }
 /* 
@@ -250,7 +251,26 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
   int ans=1;
-  return 0;
+  int sign=(x>>31);
+  int temp=0;
+  x=x^sign;
+  temp=!!(x>>16)<<4;
+  ans=ans+temp;
+  x=x>>temp;
+  temp=!!(x>>8)<<3;
+  ans=ans+temp;
+  x=x>>temp;
+  temp=!!(x>>4)<<2;
+  ans=ans+temp;
+  x=x>>temp;
+  temp=!!(x>>2)<<1;
+  ans=ans+temp;
+  x=x>>temp;
+  temp=!!(x>>1);
+  ans=ans+temp;
+  x=x>>temp;
+  ans=ans+x;
+  return ans;
 }
 //float
 /* 
@@ -296,6 +316,7 @@ int floatFloat2Int(unsigned uf) {
   unsigned sign = uf & 0x80000000;
   unsigned exp = (uf >> 23) & 0xFF;
   unsigned frac = uf & 0x7FFFFF;
+  int ans=0;
   if (exp == 0xFF) {
   return 0x80000000u;
   }
@@ -305,7 +326,7 @@ int floatFloat2Int(unsigned uf) {
   if(exp>158){
     return 0x80000000u;
   }
-  int ans=1<<(exp-127);
+  ans=1<<(exp-127);
   if(exp>=150){
     ans+=frac<<(exp-150);
   }
