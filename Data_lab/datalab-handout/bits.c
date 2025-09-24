@@ -200,8 +200,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
-}
+  return (!((x>>4)^0x3))&(!(x&(0x8))|!(x&(0x6)));}
 /* 
  * conditional - same as x ? y : z 
  *   Example: conditional(2,4,5) = 4
