@@ -293,7 +293,29 @@ unsigned floatScale2(unsigned uf) {
  *   Rating: 4
  */
 int floatFloat2Int(unsigned uf) {
-  return 2;
+  unsigned sign = uf & 0x80000000;
+  unsigned exp = (uf >> 23) & 0xFF;
+  unsigned frac = uf & 0x7FFFFF;
+  if (exp == 0xFF) {
+  return 0x80000000u;
+  }
+  if(exp<127){
+    return 0;
+  }
+  if(exp>158){
+    return 0x80000000u;
+  }
+  int ans=1<<(exp-127);
+  if(exp>=150){
+    ans+=frac<<(exp-150);
+  }
+  else{
+    ans+=frac>>(150-exp);
+  }
+  if(sign){
+    return -ans;
+  }
+  return ans;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
