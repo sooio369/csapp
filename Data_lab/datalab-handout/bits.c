@@ -249,6 +249,7 @@ int logicalNeg(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
+  int ans=1;
   return 0;
 }
 //float
@@ -264,7 +265,20 @@ int howManyBits(int x) {
  *   Rating: 4
  */
 unsigned floatScale2(unsigned uf) {
-  return 2;
+  unsigned sign = uf & 0x80000000;
+  unsigned exp = (uf >> 23) & 0xFF;
+  unsigned frac = uf & 0x7FFFFF;
+  if (exp == 0xFF) {
+  return uf;
+  }
+  if (exp == 0) {
+  return sign | (frac << 1);
+  }
+  exp++;
+  if (exp == 0xFF) {
+    return sign | 0x7F800000; 
+  }
+  return sign|(exp << 23)|frac;
 }
 /* 
  * floatFloat2Int - Return bit-level equivalent of expression (int) f
