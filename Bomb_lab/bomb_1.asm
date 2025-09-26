@@ -7,7 +7,3 @@ Dump of assembler code for function phase_1:
    0x0000000000400ef2 <+18>:	call   0x40143a <explode_bomb>
    0x0000000000400ef7 <+23>:	add    $0x8,%rsp
    0x0000000000400efb <+27>:	ret
-End of assembler dump.
-Warning: 'set logging off', an alias for the command 'set logging enabled', is deprecated.
-Use 'set logging enabled off'.
-

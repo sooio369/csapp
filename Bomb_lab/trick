@@ -1,0 +1,4 @@
+set logging file bomb_6.asm
+set logging on
+disassemble phase_6
+set logging off
