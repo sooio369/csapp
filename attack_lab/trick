@@ -1,0 +1,5 @@
+./hex2raw < ans.txt | ./ctarget -q
+
+
+gcc -c example.s 
+objdump -d example.o > example.d
