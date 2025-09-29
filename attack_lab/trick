@@ -3,3 +3,8 @@
 
 gcc -c example.s 
 objdump -d example.o > example.d
+
+
+ROPgadget --binary ctarget | grep ""
+
+objdump -d rtarget | grep --color=auto -A 1 ' 58 '
